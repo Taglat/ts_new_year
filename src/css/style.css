@@ -6,13 +6,16 @@
 }
 
 body, html {
-  height: 100svh;
-  background-color: #0000ff;
+  min-height: 100svh;
 }
 
 #app {
   position: relative;
+  height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #0000ff;
 }
 
 #elevator {
@@ -38,3 +41,26 @@ body, html {
   border: 1px solid black;
   padding: 5px 10px;
 }
+
+.section {
+  height: 100svh;
+  border: 1px solid black;
+  flex-shrink: 0;
+}
+
+#start {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100svh;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: red;
+}
+/* 
+.start_title {
+  z-index: 11;
+} */
