@@ -1,0 +1,40 @@
+@import url("./utils.css");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100svh;
+  background-color: #0000ff;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+}
+
+#elevator {
+  position: fixed;
+  top: 50%;
+  left: 2%;
+  transform: translate(0, -50%); /* смещаем центр элемента к точке top/left */
+  border: 1px solid black;
+
+  width: 100px;
+  height: 200px;
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#date {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  background-color: lightblue;  
+  border: 1px solid black;
+  padding: 5px 10px;
+}
