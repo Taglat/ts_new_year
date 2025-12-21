@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tomorrow School New Year</title>
+
+    <link rel="stylesheet" href="./src/css/style.css">
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- December 2025 - TOP -->
+      <section class="section" data-month="December 2025" data-season="winter"></section>
+      <section class="section" data-month="November 2025" data-season="fall"></section>
+      <section class="section" data-month="October 2025" data-season="fall"></section>
+      <section class="section" data-month="September 2025" data-season="fall"></section>
+      <section class="section" data-month="August 2025" data-season="summer"></section>
+      <section class="section" data-month="July 2025" data-season="summer"></section>
+      <section class="section" data-month="June 2025" data-season="summer"></section>
+      <section class="section" data-month="May 2025" data-season="spring"></section>
+      <section class="section" data-month="April 2025" data-season="spring"></section>
+      <section class="section" data-month="March 2025" data-season="spring"></section>
+      <section class="section" data-month="February 2025" data-season="winter"></section>
+      <section class="section" data-month="January 2025" data-season="winter"></section>
+      <section class="section" data-month="December 2024" data-season="winter"></section>
+      <section class="section" data-month="November 2024" data-season="fall"></section>
+      <section class="section" data-month="October 2024" data-season="fall"></section>
+      <!-- October 2024 - BOTTOM (start) -->
+      
+      <!-- Elevator with cable and stick figure -->
+      <div id="elevator-cable"></div>
+      <div id="elevator">
+        <div id="human"></div>
+      </div>
+      
+      <!-- Date display -->
+      <div id="date">October 2024</div>
+      
+      <!-- Season particles container -->
+      <div id="particles"></div>
+      
+      <!-- Additional animation elements -->
+      <div id="wind-lines"></div>
+      <div id="birds-container"></div>
+      <div id="clouds-container"></div>
+      
+      <!-- Start screen -->
+      <div id="start">
+        <div class="start_title">
+          Tomorrow School Elevator<br>
+          2025 New Year!
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+#start {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, red 0%, rgb(208, 68, 68) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Контент поверх */
+.start_content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+
+.start_title {
+  text-align: center;
+  font-family: "Luckiest Guy", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 92px;
+}
+.start_title span {
+  -webkit-text-stroke: 2px #0000ff;
+  color: #ffffff; /* цвет текста */
+}
+
+/* Play button */
+.play-button {
+  width: 120px;
+  height: 120px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+/* Triangle */
+.play-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-left: 50px solid white;
+}
+
+/* Circle outline */
+.play-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 4px solid white;
+  border-radius: 50%;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Hover effects */
+.play-button:hover {
+  transform: scale(1.1);
+}
+
+.play-button:hover::before {
+  border-left-color: #0000ff;
+}
+
+.play-button:hover::after {
+  border-color: #0000ff;
+}

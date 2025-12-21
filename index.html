@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,55 +6,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tomorrow School New Year</title>
 
-    <link rel="stylesheet" href="./src/css/style.css">
-    <!-- GSAP Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link rel="stylesheet" href="./src/css/style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="app">
       <!-- December 2025 - TOP -->
-      <section class="section" data-month="December 2025" data-season="winter"></section>
-      <section class="section" data-month="November 2025" data-season="fall"></section>
-      <section class="section" data-month="October 2025" data-season="fall"></section>
-      <section class="section" data-month="September 2025" data-season="fall"></section>
-      <section class="section" data-month="August 2025" data-season="summer"></section>
-      <section class="section" data-month="July 2025" data-season="summer"></section>
-      <section class="section" data-month="June 2025" data-season="summer"></section>
-      <section class="section" data-month="May 2025" data-season="spring"></section>
-      <section class="section" data-month="April 2025" data-season="spring"></section>
-      <section class="section" data-month="March 2025" data-season="spring"></section>
-      <section class="section" data-month="February 2025" data-season="winter"></section>
-      <section class="section" data-month="January 2025" data-season="winter"></section>
-      <section class="section" data-month="December 2024" data-season="winter"></section>
-      <section class="section" data-month="November 2024" data-season="fall"></section>
-      <section class="section" data-month="October 2024" data-season="fall"></section>
-      <!-- October 2024 - BOTTOM (start) -->
-      
-      <!-- Elevator with cable and stick figure -->
+      <section class="section" data-month="December 2025" data-season="winter">
+        15
+      </section>
+      <section class="section" data-month="November 2025" data-season="fall">
+        14
+      </section>
+      <section class="section" data-month="October 2025" data-season="fall">
+        13
+      </section>
+      <section class="section" data-month="September 2025" data-season="fall">
+        12
+      </section>
+      <section class="section" data-month="August 2025" data-season="summer">
+        11
+      </section>
+      <section class="section" data-month="July 2025" data-season="summer">
+        10
+      </section>
+      <section class="section" data-month="June 2025" data-season="summer">
+        9
+      </section>
+      <section class="section" data-month="May 2025" data-season="spring">
+        8
+      </section>
+      <section class="section" data-month="April 2025" data-season="spring">
+        7
+      </section>
+      <section class="section" data-month="March 2025" data-season="spring">
+        6
+      </section>
+      <section class="section" data-month="February 2025" data-season="winter">
+        5
+      </section>
+      <section class="section" data-month="January 2025" data-season="winter">
+        4
+      </section>
+      <section class="section" data-month="December 2024" data-season="winter">
+        3
+      </section>
+      <section class="section" data-month="November 2024" data-season="fall">
+        2
+      </section>
+      <section class="section" data-month="October 2024" data-season="fall">
+        1
+      </section>
+
       <div id="elevator-cable"></div>
-      <div id="elevator">
-        <div id="human"></div>
+      <div id="elevator-wrapper">
+        <div id="elevator">
+          <div id="human"></div>
+        </div>
       </div>
-      
-      <!-- Date display -->
+
       <div id="date">October 2024</div>
-      
-      <!-- Season particles container -->
-      <div id="particles"></div>
-      
-      <!-- Additional animation elements -->
-      <div id="wind-lines"></div>
-      <div id="birds-container"></div>
-      <div id="clouds-container"></div>
-      
-      <!-- Start screen -->
+
       <div id="start">
-        <div class="start_title">
-          Tomorrow School Elevator<br>
-          2025 New Year!
+        <div class="start_content">
+          <div class="start_title">
+            <span>Tomorrow School Elevator</span><br />
+            2025 New Year!
+          </div>
+
+          <button class="play-button" id="start_btn" aria-label="Play"></button>
+        </div>
+      </div>
+
+      <div id="play_controlls">
+        <button id="play_pause" aria-label="Play / Pause">⏸</button>
+
+        <div id="speed_controls">
+          <button class="speed-btn active" data-speed="1">1×</button>
+          <button class="speed-btn" data-speed="0.5">0.5×</button>
+          <button class="speed-btn" data-speed="1.5">1.5×</button>
         </div>
       </div>
     </div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>

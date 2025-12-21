@@ -1,0 +1,48 @@
+
+/* Elevator cable */
+#elevator-cable {
+  position: fixed;
+  top: 0;
+  left: 5%;
+  width: 3px;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(90, 120, 180, 0.85),
+    rgba(60, 90, 150, 0.65),
+    rgba(90, 120, 180, 0.85)
+  );
+  z-index: 5;
+}
+
+/* Elevator wrapper (controls position + scale) */
+#elevator-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 5%;
+  transform: translate(-50%, -50%) scale(0.6);
+  transform-origin: center;
+  z-index: 10;
+}
+
+/* Elevator cabin */
+#elevator {
+  position: relative;
+  width: 150px;
+  height: 250px;
+  border-radius: 24px;
+  display: flex;
+  justify-content: flex-end;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  background: url(../imgs/elevator.png) center / cover no-repeat;
+}
+
+/* Human */
+#elevator #human {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  width: 100px;
+  height: 200px;
+  background: url(../imgs/human_ts.png) center / contain no-repeat;
+}
