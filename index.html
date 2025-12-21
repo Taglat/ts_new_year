@@ -11,11 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Pacifico&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -64,8 +60,22 @@
       <section class="section" data-month="November 2024" data-season="fall">
         2
       </section>
-      <section class="section" data-month="October 2024" data-season="fall">
-        1
+      <section
+        class="section"
+        id="section1"
+        data-month="October 2024"
+        data-season="fall"
+      >
+        <div id="myPinSpacer">
+          <div id="pinned">
+            <h3 class="press-start-2p-regular">Tomorrow School</h3>
+            <p>
+              Click to <button class="pixel-btn">Play</button> or scroll up!
+            </p>
+          </div>
+        </div>
+
+        <div class="land"></div>
       </section>
 
       <div id="elevator-cable"></div>
@@ -77,27 +87,14 @@
 
       <div id="date">October 2024</div>
 
-      <div id="start">
-        <div class="start_content">
-          <div class="start_title">
-            <span>Tomorrow School Elevator</span><br />
-            2025 New Year!
-          </div>
-
-          <button class="play-button" id="start_btn" aria-label="Play"></button>
-        </div>
-      </div>
-
-      <div id="play_controlls">
-        <button id="play_pause" aria-label="Play / Pause">⏸</button>
-
-        <div id="speed_controls">
-          <button class="speed-btn active" data-speed="1">1×</button>
-          <button class="speed-btn" data-speed="0.5">0.5×</button>
-          <button class="speed-btn" data-speed="1.5">1.5×</button>
-        </div>
+      <div id="speed_controls">
+        <button class=""></button>
+        <button class="speed-btn active" data-speed="1">1×</button>
+        <button class="speed-btn" data-speed="0.5">0.5×</button>
+        <button class="speed-btn" data-speed="1.5">1.5×</button>
       </div>
     </div>
+
     <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>

@@ -1,0 +1,44 @@
+#section1 {
+  position: relative;
+  background-image: url("../imgs/небо.png");
+  background-size: cover; /* растягивает на весь блок */
+  background-position: center; /* центрирует */
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+  gap: 20px;
+}
+.land {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: url("../imgs/land.jpg");
+  background-size: cover; /* растягивает на весь блок */
+  background-position: center; /* центрирует */
+  background-repeat: no-repeat;
+  z-index: 10;
+  height: 130px;
+}
+
+#section1 h3, #section1 p {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.8s ease-out forwards;
+  font-size: 72px;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.spacer {
+  height: 200vh;
+  background: linear-gradient(#ccc, #eee);
+}
