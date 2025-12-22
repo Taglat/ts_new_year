@@ -1,0 +1,17 @@
+.START {
+  height: 100vh;
+  background: #0000FF;
+  color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.START h3 {
+    font-size: 102px;
+    font-family: 'Press Start 2P', monospace;
+}

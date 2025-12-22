@@ -1,8 +1,22 @@
-@import url("./elevator_human.css");
-@import url("./HUD.css");
-@import url("./section1.css");
 @import url("./utils.css");
+@import url("./ui.css");
 
+@import url("./sections/START.css");
+@import url("./sections/OCT_2024.css");
+@import url("./sections/NOV_2024.css");
+@import url("./sections/DEC_2024.css");
+@import url("./sections/JAN_2025.css");
+@import url("./sections/FEB_2025.css");
+@import url("./sections/MAR_2025.css");
+@import url("./sections/APR_2025.css");
+@import url("./sections/MAY_2025.css");
+@import url("./sections/JUN_2025.css");
+@import url("./sections/JUL_2025.css");
+@import url("./sections/AUG_2025.css");
+@import url("./sections/SEP_2025.css");
+@import url("./sections/OCT_2025.css");
+@import url("./sections/NOV_2025.css");
+@import url("./sections/DEC_2025.css");
 
 * {
   margin: 0;
@@ -21,7 +35,7 @@ html, body {
   flex-direction: column;
 }
 
-.section {
+section {
   height: 100svh;
   flex-shrink: 0;
   position: relative;
