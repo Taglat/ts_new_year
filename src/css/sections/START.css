@@ -1,5 +1,4 @@
 .START {
-  height: 100vh;
   background: #0000FF;
   color: #ffffff;
 
@@ -9,9 +8,10 @@
   justify-content: center;
 
   text-align: center;
+
+  z-index: 1;
 }
 
 .START h3 {
-    font-size: 102px;
-    font-family: 'Press Start 2P', monospace;
+  font-size: 102px;
 }
