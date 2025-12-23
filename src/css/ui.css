@@ -1,4 +1,4 @@
-#btn_start {
+.btn {
   font-family: "Press Start 2P", monospace;
   font-size: 16px;
 
@@ -19,19 +19,19 @@
   image-rendering: pixelated;
 }
 
-#btn_start:hover {
+.btn:hover {
   transform: translate(4px, 4px);
   box-shadow:
     2px 2px 0 #000,
     4px 4px 0 #00aa55;
 }
 
-#btn_start:active {
+.btn:active {
   transform: translate(8px, 8px);
   box-shadow: none;
 }
 
-#btn_start {
+.btn {
   animation: pulse 1.5s infinite;
 }
 
