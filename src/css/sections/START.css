@@ -1,4 +1,6 @@
 .START {
+  height: 100svh;
+  width: 100%;
   background: #0000FF;
   color: #ffffff;
 
@@ -10,8 +12,10 @@
   text-align: center;
 
   z-index: 1;
+
+  position: absolute;
 }
 
 .START h3 {
-  font-size: 102px;
+  font-size: 88px;
 }
