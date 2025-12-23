@@ -39,9 +39,9 @@ export function initNOV_2025(section, stateManager, index) {
   const mkTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: mkContainer,
-      start: "top 80%",      // Start when container enters viewport (80% from top) // 
+      start: "top 80%",
       end: "center 30%",
-      // start: "top 70%",      // Start a bit earlier
+      // start: "top 70%",      
       // end: "center center",
       scrub: 1,
     }
