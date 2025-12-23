@@ -3,7 +3,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import StateManager from "./StateManager";
 
-import { initControls } from "./controllers";
+import { initControls } from "./Controllers";
 import { initStart } from "./sections/START";
 import { initSection } from "./SectionTemplate";
 import { initTUTORIAL } from "./sections/TUTORIAL";

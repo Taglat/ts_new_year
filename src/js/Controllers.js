@@ -3,14 +3,18 @@ import gsap from "gsap";
 export function initControls(stateManager) {
     const playPauseBtn = document.querySelector("#play-pause-btn");
     let autoScrollTimeline = null;
-    let isPaused = stateManager.state === "paused";
 
+    // 🎯 Подписываемся на событие PLAYING
     stateManager.on(stateManager.STATES.PLAYING, () => {
         if (!autoScrollTimeline) {
             autoScrollTimeline = createAutoScrollTimeline();
         }
         autoScrollTimeline.play();
-        isPaused = false;
+        updateIcon();
+    });
+
+    // 🎯 Подписываемся на событие PAUSED
+    stateManager.on(stateManager.STATES.PAUSED, () => {
         updateIcon();
     });
 
@@ -22,7 +26,7 @@ export function initControls(stateManager) {
             paused: true, // Изначально на паузе
             onComplete: () => {
                 stateManager.setState(stateManager.STATES.FINISHED);
-                isPaused = true;
+                stateManager.setState(stateManager.STATES.PAUSED);
                 updateIcon();
             }
         });
@@ -51,13 +55,15 @@ export function initControls(stateManager) {
      * Обновляет иконку кнопки Play/Pause
      */
     function updateIcon() {
-        playPauseBtn.innerHTML = isPaused
+        // Показываем Pause (⏸) только когда состояние PLAYING
+        // Во всех остальных случаях (intro, paused, finished) показываем Play (▶)
+        playPauseBtn.innerHTML = stateManager.state === stateManager.STATES.PLAYING
             ? `<svg viewBox="0 0 24 24">
-                 <path d="M8 5v14l11-7z" />
-               </svg>` // Play ▶
-            : `<svg viewBox="0 0 24 24">
                  <path d="M6 5h4v14H6zm8 0h4v14h-4z" />
-               </svg>`; // Pause ⏸
+               </svg>` // Pause ⏸
+            : `<svg viewBox="0 0 24 24">
+                 <path d="M8 5v14l11-7z" />
+               </svg>`; // Play ▶
     }
 
     updateIcon();
@@ -65,10 +71,9 @@ export function initControls(stateManager) {
     // 🎬 Кнопка Play/Pause
     playPauseBtn.addEventListener("click", () => {
         stateManager.togglePlayPause();
-        isPaused = stateManager.state === "paused";
         updateIcon();
 
-        if (isPaused) {
+        if (stateManager.state === "paused") {
             // Пауза: останавливаем таймлайн
             if (autoScrollTimeline) {
                 autoScrollTimeline.pause();
@@ -91,7 +96,6 @@ export function initControls(stateManager) {
                 autoScrollTimeline.pause();
             }
             stateManager.setState(stateManager.STATES.PAUSED);
-            isPaused = true;
             updateIcon();
 
             gsap.to(window, {
@@ -111,7 +115,6 @@ export function initControls(stateManager) {
                 autoScrollTimeline.pause();
             }
             stateManager.setState(stateManager.STATES.PAUSED);
-            isPaused = true;
             updateIcon();
 
             gsap.to(window, {

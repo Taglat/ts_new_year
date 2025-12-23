@@ -8,9 +8,15 @@ export function initStart(stateManager) {
 
     let isHidden = false; // защита от повторного срабатывания
 
-    function hideStart() {
+    function hideStart(shouldPlay = false) {
         if (isHidden) return;
         isHidden = true;
+
+        if (shouldPlay) {
+            stateManager.setState(stateManager.STATES.PLAYING);
+        } else {
+            stateManager.setState(stateManager.STATES.PAUSED);
+        }
 
         gsap.to(section, {
             opacity: 0,
@@ -44,13 +50,12 @@ export function initStart(stateManager) {
 
     // Клик по кнопке
     btn.addEventListener("click", () => {
-        hideStart();
-        stateManager.setState(stateManager.STATES.PLAYING);
+        hideStart(true); // true = включить автоплей
     });
 
     // Первый скролл (мышь + тач)
     function onFirstScroll(e) {
-        hideStart();
+        hideStart(false); // false = НЕ запускать автоплей
     }
 
     window.addEventListener("wheel", onFirstScroll, { passive: true });
