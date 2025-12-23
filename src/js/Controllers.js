@@ -1,21 +1,35 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { stateManager } from "./main";
 
 export function initControls(stateManager) {
     const playPauseBtn = document.querySelector("#play-pause-btn");
-    let isPaused = false;
+
+    let isPaused = stateManager.state === "paused";
+
+    function updateIcon() {
+        playPauseBtn.innerHTML = isPaused
+            ? `<svg viewBox="0 0 24 24">
+                 <path d="M8 5v14l11-7z" />
+               </svg>`
+            : `<svg viewBox="0 0 24 24">
+                 <path d="M6 5h4v14H6zm8 0h4v14h-4z" />
+               </svg>`;
+    }
+
+    updateIcon();
 
     playPauseBtn.addEventListener("click", () => {
-        isPaused = !isPaused;
+        stateManager.togglePlayPause();
+        isPaused = stateManager.state === "paused";
+        updateIcon();
+
+        // 🔥 ВАЖНО: управляем ScrollTrigger, а НЕ globalTimeline
         ScrollTrigger.getAll().forEach(st => {
-            if (isPaused) st.pause();
-            else st.resume();
+            isPaused ? st.disable() : st.enable();
         });
     });
 
     document.querySelector("#next-btn").addEventListener("click", () => {
-        // Просто скроллим к следующей секции, StateManager и анимации обновятся через ScrollTrigger
         const nextIndex = stateManager.currentIndex + 1;
         if (nextIndex < stateManager.sections.length) {
             gsap.to(window, {

@@ -80,4 +80,13 @@ export default class StateManager {
         console.log(`this.currentIndex: ${this.currentIndex}`);
         return this.sections[this.currentIndex];
     }
+
+    togglePlayPause() {
+        if (this.state === this.STATES.PLAYING) {
+            this.setState(this.STATES.PAUSED);
+        } else {
+            this.setState(this.STATES.PLAYING);
+        }
+        console.log(`this.state: ${this.state}`);
+    }
 }

@@ -51,10 +51,3 @@
   height: 34px;
   fill: currentColor;
 }
-
-#play-pause-btn {
-  background: #cccccc;
-  box-shadow:
-    4px 4px 0 #000,
-    8px 8px 0 #888888;
-}
