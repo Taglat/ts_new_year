@@ -10,6 +10,7 @@ import { initTUTORIAL } from "./sections/TUTORIAL";
 
 // Не завбывайте писать код для анимации секций и импортировать их
 // import { initDEC_2025 } from "./sections/DEC_2025";
+import { initNOV_2025 } from "./sections/NOV_2025";
 
 window.addEventListener('load', function () {
     window.scrollTo(0, 0);
@@ -27,6 +28,11 @@ sections.forEach((section, index) => {
     // Пример как регать свои анимации секций
     if (section.classList.contains("TUTORIAL")) {
         initTUTORIAL(section, stateManager, index);
+        return;
+    }
+
+    if (section.classList.contains("NOV_2025")) {
+        initNOV_2025(section, stateManager, index);
         return;
     }
 
