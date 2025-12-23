@@ -4,33 +4,55 @@ export function initStart(stateManager) {
     const section = document.querySelector(".START");
     const title = section.querySelector("h3");
     const btn = section.querySelector("#start-btn");
-    const tl = gsap.timeline();
-    console.log(btn)
-    tl.from(title, {
-        opacity: 0,
-        y: -50,
-        duration: 1,
-        ease: "power2.out",
-    }).from(btn, {
-        opacity: 0,
-        y: -50,
-        duration: 1,
-        ease: "power2.out",
-        onComplete: () => {
-            btn.style.animation = "pulse 1.5s infinite";
-        }
-    }, "-=1");
+    const p = section.querySelector("p");
 
-    btn.addEventListener("click", () => {
-        console.log("click");
+    let isHidden = false; // защита от повторного срабатывания
+
+    function hideStart() {
+        if (isHidden) return;
+        isHidden = true;
+
         gsap.to(section, {
             opacity: 0,
             duration: 0.5,
             onComplete: () => {
-                section.style.display = "none"; // Убираем секцию, чтобы она не перекрывала кнопки
+                section.style.display = "none";
                 document.body.style.overflow = "";
-                stateManager.setState(stateManager.STATES.SCROLLING);
+                window.removeEventListener("wheel", onFirstScroll);
+                window.removeEventListener("touchmove", onFirstScroll);
             }
         });
+    }
+
+    // Анимация появления
+    gsap.timeline()
+        .from(title, {
+            opacity: 0,
+            y: -50,
+            duration: 1,
+            ease: "power2.out",
+        })
+        .from(p, {
+            opacity: 0,
+            y: -50,
+            duration: 1,
+            ease: "power2.out",
+            onComplete: () => {
+                btn.style.animation = "pulse 1.5s infinite";
+            }
+        }, "-=1");
+
+    // Клик по кнопке
+    btn.addEventListener("click", () => {
+        hideStart();
+        stateManager.setState(stateManager.STATES.PLAYING);
     });
+
+    // Первый скролл (мышь + тач)
+    function onFirstScroll(e) {
+        hideStart();
+    }
+
+    window.addEventListener("wheel", onFirstScroll, { passive: true });
+    window.addEventListener("touchmove", onFirstScroll, { passive: true });
 }

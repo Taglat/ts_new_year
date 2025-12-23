@@ -10,7 +10,7 @@ export function initSection(section, stateManager, index) {
             markers: true, // Отладка
             onEnter: () => {
                 stateManager.currentIndex = index; // Синхронизируем стейт со скроллом
-                console.log("Current Section:", index);
+                console.log("Current Section:", index + 1);
             },
             onEnterBack: () => {
                 stateManager.currentIndex = index;
