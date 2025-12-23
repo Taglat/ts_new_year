@@ -1,0 +1,15 @@
+.TUTORIAL {
+    background: red;
+    color: white;
+
+    /* Важно для PIN эффекта */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
+    font-weight: bold;
+    text-align: center;
+
+    /* Чтобы текст был читаем во время вращения */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}

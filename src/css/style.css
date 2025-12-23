@@ -17,6 +17,7 @@
 @import url("./sections/OCT_2025.css");
 @import url("./sections/NOV_2025.css");
 @import url("./sections/DEC_2025.css");
+@import url("./sections/TUTORIAL.css");
 
 * {
   margin: 0;
