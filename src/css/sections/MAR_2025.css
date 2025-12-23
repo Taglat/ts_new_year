@@ -1,3 +1,119 @@
 .MAR_2025 {
-    background-color: blue;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+    gap: 2rem;
+    color: white;
+    z-index: 1;
+    /* По умолчанию низкий z-index, GSAP изменит его на 100 при pin */
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/* КОНТЕЙНЕР СОБЫТИЯ */
+/* ═══════════════════════════════════════════════════════ */
+.MAR_2025 .event {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/* ЗАГОЛОВОК */
+/* ═══════════════════════════════════════════════════════ */
+.MAR_2025 h3 {
+    font-size: 3rem;
+    text-align: center;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/* ОПИСАНИЕ */
+/* ═══════════════════════════════════════════════════════ */
+.MAR_2025 .desc {
+    font-size: 1.5rem;
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/* ИЗОБРАЖЕНИЕ */
+/* ═══════════════════════════════════════════════════════ */
+.MAR_2025 .img {
+    width: 80%;
+    max-width: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 10;
+}
+
+.MAR_2025 .c_img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/* ЛЕПЕСТКИ */
+/* ═══════════════════════════════════════════════════════ */
+.petals-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.8;
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* ═══════════════════════════════════════════════════════ */
+/* АДАПТИВНОСТЬ */
+/* ═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .MAR_2025 h3 {
+        font-size: 2rem;
+    }
+
+    .MAR_2025 .desc {
+        font-size: 1.2rem;
+    }
+
+    .MAR_2025 .img {
+        width: 90%;
+    }
+
+    .petal {
+        font-size: 1.5rem;
+    }
 }
