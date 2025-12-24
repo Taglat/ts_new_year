@@ -1,3 +1,210 @@
 .APR_2025 {
-    background-color: blue;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    z-index: 1;
+    isolation: isolate; /* Prevent content bleeding */
+    visibility: hidden; /* Hidden until activated */
+}
+
+/* ==========================================
+   EVENT 1: ART THERAPY - PIXEL CAPYBARA
+   ========================================== */
+
+.event-1-art-therapy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.event-1-art-therapy .event-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.8rem;
+    color: #ff6b9d;
+    text-shadow: 3px 3px 0 #fff, 6px 6px 0 #000;
+    position: absolute;
+    top: 2rem;
+}
+
+.pixel-canvas {
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    gap: 2px;
+    width: 90%;
+    max-width: 600px;
+    background: #e0e0e0;
+    padding: 15px;
+    border: 8px solid #333;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    image-rendering: pixelated;
+}
+
+.pixel {
+    aspect-ratio: 1;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+.paint-brush {
+    position: absolute;
+    font-size: 3rem;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* ==========================================
+   EVENT 2: 12 ACTIVITY CLUBS TOUR
+   ========================================== */
+
+.event-2-clubs-tour {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.event-2-clubs-tour .event-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.8rem;
+    color: #ffd700;
+    text-shadow: 3px 3px 0 #000, 6px 6px 0 #4a148c;
+    position: absolute;
+    top: 2rem;
+}
+
+.progress-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem 2rem;
+    border: 4px solid #ffd700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    position: absolute;
+    top: 6rem;
+    text-align: center;
+}
+
+.clubs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    width: 90%;
+    max-width: 900px;
+    margin-top: 4rem;
+}
+
+.club-door {
+    aspect-ratio: 0.7;
+    perspective: 1000px;
+    position: relative;
+}
+
+.door-front {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #8b4513 0%, #654321 100%);
+    border: 6px solid #000;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    backface-visibility: hidden;
+}
+
+.club-door.visited .door-front {
+    background: linear-gradient(180deg, #ffd700 0%, #ffed4e 100%);
+    box-shadow: 0 0 30px #ffd700, inset 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.door-icon {
+    font-size: 3rem;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+}
+
+.door-name {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 0 #000;
+    line-height: 1.4;
+}
+
+.door-handle {
+    width: 15px;
+    height: 15px;
+    background: #ffd700;
+    border-radius: 50%;
+    border: 3px solid #000;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+/* Sparkles */
+.sparkle {
+    position: fixed;
+    font-size: 1.5rem;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Confetti */
+.confetti-piece {
+    pointer-events: none;
+    border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .event-title {
+        font-size: 1.2rem !important;
+    }
+
+    .pixel-canvas {
+        gap: 1px;
+        padding: 10px;
+    }
+
+    .progress-text {
+        font-size: 0.8rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .clubs-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+
+    .door-name {
+        font-size: 0.5rem;
+    }
+
+    .door-icon {
+        font-size: 2rem;
+    }
 }

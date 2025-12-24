@@ -8,6 +8,8 @@ import { initStart } from "./sections/START";
 import { initSection } from "./SectionTemplate";
 import { initTUTORIAL } from "./sections/TUTORIAL";
 import { initMAR_2025 } from "./sections/MAR_2025";
+import { initAPR_2025 } from "./sections/APR_2025";
+import { initMAY_2025 } from "./sections/MAY_2025";
 
 // Не завбывайте писать код для анимации секций и импортировать их
 // import { initDEC_2025 } from "./sections/DEC_2025";
@@ -33,6 +35,16 @@ sections.forEach((section, index) => {
 
     if (section.classList.contains("MAR_2025")) {
         initMAR_2025(section, stateManager, index);
+        return;
+    }
+
+    if (section.classList.contains("APR_2025")) {
+        initAPR_2025(section, stateManager, index);
+        return;
+    }
+
+    if (section.classList.contains("MAY_2025")) {
+        initMAY_2025(section, stateManager, index);
         return;
     }
 
