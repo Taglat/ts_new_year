@@ -1,23 +1,119 @@
 .OCT_2024 {
     position: relative;
     min-height: 100vh;
-    background: #0000ff;
-    /* основной синий фон */
+    background: #0011aa;
     color: #fff;
     font-family: 'Press Start 2P', monospace;
     overflow: hidden;
 }
 
-/* Пиксельная сетка */
-.pixel-bg {
+.OCT_2024 .u_pixel-bg {
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 16px 16px;
-    /* размер пикселей */
-    pointer-events: none;
-    opacity: 0.6;
-    /* прозрачность сетки */
+    background-image: url("../../imgs/bg_pattern_px.jpg");
+
+    background-size: 12px 12px;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.OCT_2024 .container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.OCT_2024 .container .content {
+    max-width: 900px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.OCT_2024 .container .content .title {
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: 1px;
+}
+
+.OCT_2024 .container .content .text {
+    margin-top: 22px;
+    font-size: 16px;
+    color: #ccc;
+}
+
+.OCT_2024 .imgs {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 48px;
+}
+
+.OCT_2024 .imgs>div {
+    width: 440px;
+    /* фиксируем ширину */
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    /* ключевая строка */
+    opacity: 0.9;
+}
+
+.ts-img {
+    background-image: url("../../imgs/PX_TS_Width_preview-removebg-preview.png");
+    filter:
+        drop-shadow(0 0 20px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 40px rgba(0, 200, 255, 0.2));
+}
+
+.astana-hub-img {
+    background-image: url("../../imgs/PX_ASTANA_HUB_LOGO.png");
+    filter: drop-shadow(0 0 1 6px rgba(255, 255, 255, 0.25));
+
+}
+
+.expo-img {
+    background-image: url("../../imgs/PX_expo.png");
+}
+
+.OCT_2024 .imgs>div {
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.OCT_2024 .imgs>div:hover {
+    transform: scale(1.04);
+    filter:
+        drop-shadow(0 0 28px rgba(255, 255, 255, 0.6));
+}
+
+.ts-img,
+.astana-hub-img {
+    filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.4)) drop-shadow(0 0 40px rgba(0, 200, 255, 0.2));
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* Лёгкий пульс свечения */
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.4)) drop-shadow(0 0 40px rgba(0, 200, 255, 0.2));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 28px rgba(0, 200, 255, 0.6)) drop-shadow(0 0 50px rgba(0, 200, 255, 0.35));
+    }
+}
+
+.ts-img,
+.astana-hub-img {
+    animation: glowPulse 2.5s infinite alternate;
 }
