@@ -21,9 +21,13 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const sections = Array.from(document.querySelectorAll(".sections section"));
 export const stateManager = new StateManager(sections);
 
-// Анимации секций через INIT функции, которые будут писаться в отдельных файлах js/sections/
-initStart(stateManager);
+// Регистрация анимацийсекций
 sections.forEach((section, index) => {
+    if (section.classList.contains("START")) {
+        initStart(section, stateManager, index);
+        return;
+    }
+
     // Пример как регать свои анимации секций
     if (section.classList.contains("TUTORIAL")) {
         initTUTORIAL(section, stateManager, index);

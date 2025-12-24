@@ -1,7 +1,7 @@
 import gsap from "gsap";
 
-export function initStart(stateManager) {
-    const section = document.querySelector(".START");
+export function initStart(section, stateManager, index) {
+    console.log(`START INIT (index ${index})`);
     const title = section.querySelector("h3");
     const btn = section.querySelector("#start-btn");
     const p = section.querySelector("p");
@@ -19,11 +19,8 @@ export function initStart(stateManager) {
         }
 
         gsap.to(section, {
-            opacity: 0,
             duration: 0.5,
             onComplete: () => {
-                section.style.display = "none";
-                document.body.style.overflow = "";
                 window.removeEventListener("wheel", onFirstScroll);
                 window.removeEventListener("touchmove", onFirstScroll);
             }
@@ -50,12 +47,12 @@ export function initStart(stateManager) {
 
     // Клик по кнопке
     btn.addEventListener("click", () => {
-        hideStart(true); // true = включить автоплей
+        hideStart(true);
     });
 
     // Первый скролл (мышь + тач)
     function onFirstScroll(e) {
-        hideStart(false); // false = НЕ запускать автоплей
+        hideStart(false);
     }
 
     window.addEventListener("wheel", onFirstScroll, { passive: true });
