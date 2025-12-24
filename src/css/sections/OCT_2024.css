@@ -1,156 +1,119 @@
-/* ======================
-   OCT 2024 — BASE
-====================== */
-
 .OCT_2024 {
     position: relative;
     min-height: 100vh;
-    padding: 120px 24px;
-    background: #0c0f14;
-    color: #e6e6e6;
+    background: #0011aa;
+    color: #fff;
     font-family: 'Press Start 2P', monospace;
     overflow: hidden;
 }
 
-/* Pixel background grid */
-.OCT_2024 .pixel-bg {
+.OCT_2024 .u_pixel-bg {
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 24px 24px;
-    opacity: 0.4;
-    pointer-events: none;
+    background-image: url("../../imgs/bg_pattern_px.jpg");
+
+    background-size: 12px 12px;
+    opacity: 0.15;
+    z-index: 0;
 }
 
-/* ======================
-   HEADER
-====================== */
-
-.OCT_2024 .month-header {
+.OCT_2024 .container {
+    width: 100%;
+    height: 100%;
     position: relative;
-    z-index: 2;
-    max-width: 800px;
-    margin-bottom: 80px;
-}
-
-.OCT_2024 .month-chip {
-    display: inline-block;
-    padding: 8px 12px;
-    background: #1e90ff;
-    color: #000;
-    font-size: 10px;
-    margin-bottom: 16px;
-}
-
-.OCT_2024 .month-title {
-    font-size: 32px;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-}
-
-.OCT_2024 .month-subtitle {
-    font-size: 12px;
-    opacity: 0.7;
-}
-
-/* ======================
-   EVENTS GRID
-====================== */
-
-.OCT_2024 .events-grid {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 32px;
-}
-
-/* ======================
-   EVENT CARD
-====================== */
-
-.OCT_2024 .event-card {
-    background: #11151d;
-    border: 4px solid #2a2f3a;
-    padding: 24px;
-    position: relative;
-    box-shadow: 0 0 0 4px #000;
-    transition: transform 0.15s steps(2), box-shadow 0.15s;
-}
-
-.OCT_2024 .event-card::before {
-    content: "";
-    position: absolute;
-    inset: -4px;
-    border: 2px dashed rgba(255, 255, 255, 0.05);
-    pointer-events: none;
-}
-
-.OCT_2024 .event-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 0 #000;
-}
-
-/* Quest types */
-.OCT_2024 .main-quest {
-    border-color: #f5c542;
-}
-
-.OCT_2024 .quest {
-    cursor: pointer;
-}
-
-/* ======================
-   EVENT CONTENT
-====================== */
-
-.OCT_2024 .event-icon {
-    font-size: 28px;
-    margin-bottom: 16px;
-}
-
-.OCT_2024 .event-title {
-    font-size: 14px;
-    margin-bottom: 12px;
-}
-
-.OCT_2024 .event-desc {
-    font-size: 11px;
-    line-height: 1.6;
-    opacity: 0.8;
-}
-
-/* ======================
-   EVENT UI
-====================== */
-
-.OCT_2024 .event-ui {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    font-size: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 }
 
-.OCT_2024 .xp {
-    color: #7CFC00;
+.OCT_2024 .container .content {
+    max-width: 900px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(40px);
 }
 
-.OCT_2024 .tag {
-    background: #f5c542;
-    color: #000;
-    padding: 4px 6px;
+.OCT_2024 .container .content .title {
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: 1px;
 }
 
-/* ======================
-   LEVEL COMPLETE
-====================== */
+.OCT_2024 .container .content .text {
+    margin-top: 22px;
+    font-size: 16px;
+    color: #ccc;
+}
 
-.OCT_2024 .level-complete {
-    position: absolute;
-    bottom: 32px;
-    right: 32px;
-    font-size: 10px;
-    opacity: 0.3;
+.OCT_2024 .imgs {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 48px;
+}
+
+.OCT_2024 .imgs>div {
+    width: 440px;
+    /* фиксируем ширину */
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    /* ключевая строка */
+    opacity: 0.9;
+}
+
+.ts-img {
+    background-image: url("../../imgs/PX_TS_Width_preview-removebg-preview.png");
+    filter:
+        drop-shadow(0 0 20px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 40px rgba(0, 200, 255, 0.2));
+}
+
+.astana-hub-img {
+    background-image: url("../../imgs/PX_ASTANA_HUB_LOGO.png");
+    filter: drop-shadow(0 0 1 6px rgba(255, 255, 255, 0.25));
+
+}
+
+.expo-img {
+    background-image: url("../../imgs/PX_expo.png");
+}
+
+.OCT_2024 .imgs>div {
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.OCT_2024 .imgs>div:hover {
+    transform: scale(1.04);
+    filter:
+        drop-shadow(0 0 28px rgba(255, 255, 255, 0.6));
+}
+
+.ts-img,
+.astana-hub-img {
+    filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.4)) drop-shadow(0 0 40px rgba(0, 200, 255, 0.2));
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* Лёгкий пульс свечения */
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.4)) drop-shadow(0 0 40px rgba(0, 200, 255, 0.2));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 28px rgba(0, 200, 255, 0.6)) drop-shadow(0 0 50px rgba(0, 200, 255, 0.35));
+    }
+}
+
+.ts-img,
+.astana-hub-img {
+    animation: glowPulse 2.5s infinite alternate;
 }

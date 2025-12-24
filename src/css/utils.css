@@ -3,3 +3,14 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.u_pixel-bg {
+  position: absolute;
+  inset: 0;
+  background-color: #0000ff;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}

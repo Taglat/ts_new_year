@@ -6,39 +6,40 @@ export function startAutoScroll(stateManager, sections) {
     if (!sections || !sections.length) return;
 
     const index = stateManager.currentIndex;
-
-    if (index < 0 || index >= sections.length) {
-        stateManager.setState("scroll");
-        return;
-    }
-
     const section = sections[index];
+
     if (!section) {
         stateManager.setState("scroll");
         return;
     }
-    const st = section?._st;
 
-    // 🧠 если секция с pinned ScrollTrigger
+
+    // 🧠 скорость секции
+    const sectionSpeed = Number(section.dataset.speed) || 1;
+
+    const st = section._st;
+
+    // 🔒 PINNED секция
     if (st) {
+        const scrollDistance = st.end - st.start;
+
         autoTween = gsap.to(window, {
             scrollTo: {
                 y: st.end,
                 autoKill: false
             },
-            duration: 2 / stateManager.speed,
-            ease: "linear",
-
-            onComplete: () => {
-                // 
-            }
+            duration:
+                scrollDistance /
+                1200 /
+                (stateManager.speed * sectionSpeed),
+            ease: "linear"
         });
 
         return;
     }
 
-    // обычная секция
-    const nextIndex = stateManager.currentIndex + 1;
+    // 🧭 обычная секция
+    const nextIndex = index + 1;
     if (!sections[nextIndex]) {
         stateManager.setState("scroll");
         return;
@@ -46,15 +47,22 @@ export function startAutoScroll(stateManager, sections) {
 
     autoTween = gsap.to(window, {
         scrollTo: sections[nextIndex],
-        duration: 1 / stateManager.speed,
+        duration: 1.2 / (stateManager.speed * sectionSpeed),
         ease: "power2.inOut",
-
         onComplete: () => {
             if (stateManager.state === "auto") {
                 startAutoScroll(stateManager, sections);
             }
         }
     });
+
+    console.log(
+        "AUTO",
+        section.className,
+        "sectionSpeed:", sectionSpeed,
+        "globalSpeed:", stateManager.speed,
+        "distance:", st?.end - st?.start
+    );
 }
 
 export function stopAutoScroll() {

@@ -1,66 +1,114 @@
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { startAutoScroll } from "../autoPlay";
 
 export function initOCT_2024({ section, index, stateManager, sections }) {
-    const bg = section.querySelector(".pixel-bg");
-    const header = section.querySelector(".month-header");
-    const title = section.querySelector(".month-title");
-    const subtitle = section.querySelector(".month-subtitle");
-    const chip = section.querySelector(".month-chip");
+    section.dataset.speed = "0.6";
 
-    const cards = section.querySelectorAll(".event-card");
-    const levelComplete = section.querySelector(".level-complete");
+    const bg = section.querySelector(".u_pixel-bg");
+    const content = section.querySelector(".content");
 
-    gsap.set([header, cards, levelComplete], { opacity: 0 });
-    gsap.set(cards, { y: 40, scale: 0.95 });
-    gsap.set(levelComplete, { y: 20 });
+    const ts = section.querySelector(".ts-img");
+    const astana = section.querySelector(".astana-hub-img");
 
-    // 1️⃣ СНАЧАЛА собираем timeline
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "+=900%",
+            scrub: true,
+            pin: true,
 
-    tl.from(bg, { opacity: 0 })
-        .to(header, { opacity: 1 })
-        .from(chip, { scale: 0, rotation: -10 })
-        .from(title, { y: 40, opacity: 0 })
-        .from(subtitle, { y: 20, opacity: 0 }, "-=0.3")
-        .to(cards, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            stagger: 0.3,
-            ease: "power2.out"
-        })
-        .to(levelComplete, {
-            opacity: 0.4,
-            y: 0
-        });
+            onEnter: () => stateManager.setIndex(index),
+            onEnterBack: () => stateManager.setIndex(index),
 
-    // 2️⃣ ТОЛЬКО ПОТОМ создаём ScrollTrigger
-    const st = ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: "+=300%",
-        pin: true,
-        scrub: 1,
-        animation: tl,
-
-        onLeave: () => {
-            if (stateManager.state === "auto") {
+            onLeave: () => {
                 const nextIndex = index + 1;
-
-                // 🔥 ЕСЛИ ЭТО ПОСЛЕДНЯЯ СЕКЦИЯ
                 if (nextIndex >= sections.length) {
                     stateManager.setState("scroll");
                     return;
                 }
-
                 stateManager.setIndex(nextIndex);
                 startAutoScroll(stateManager, sections);
             }
         }
     });
 
-    // 3️⃣ Сохраняем ссылку для autoplay
-    section._st = st;
+    /* 🎥 CINEMATIC ZOOM всей сцены */
+    tl.fromTo(section,
+        { scale: 1 },
+        {
+            scale: 1.03,
+            transformOrigin: "center center",
+            ease: "none",
+            duration: 1 // откат
+        },
+        0
+    );
+
+    /* 🟦 PIXEL BACKGROUND движение */
+    tl.to(bg, {
+        backgroundPosition: "128px 128px",
+        duration: 1, // откат
+        ease: "none"
+    }, 0);
+
+    /* 📝 ТЕКСТ — уверенный вход */
+    tl.to(content, {
+        opacity: 1,
+        y: 0,
+        duration: 1, // откат
+        ease: "power3.out"
+    }, 0.4);
+
+    /* 🏢 ASTANA HUB — спокойный, стабильный */
+    tl.fromTo(astana,
+        {
+            opacity: 0,
+            scale: 0.85
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            duration: 1, // откат
+            ease: "power2.out"
+        },
+        1
+    );
+
+    tl.fromTo(ts,
+        {
+            opacity: 0,
+            scale: 0.7,
+            filter: "blur(6px)"
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 1, // откат
+            ease: "elastic.out(1, 0.6)"
+        },
+        1.2
+    );
+
+    /* 🌊 ALIVE MOTION — разная фаза (ключевой момент) */
+    tl.to(astana, {
+        y: -8,
+        duration: 1, // откат
+        ease: "sine.inOut"
+    }, 2.2);
+
+    tl.to(ts, {
+        y: -14,
+        duration: 1, // откат
+        ease: "sine.inOut"
+    }, 2.3);
+
+    tl.to([ts, astana], {
+        filter: "drop-shadow(0 0 28px rgba(0,200,255,0.6)) drop-shadow(0 0 50px rgba(0,200,255,0.35))",
+        duration: 1 // откат
+    }, 2.4);
+
+    section._st = tl.scrollTrigger;
+    return tl;
 }
