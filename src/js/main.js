@@ -5,7 +5,6 @@ import StateManager from "./StateManager";
 
 import { initControls } from "./Controllers";
 import { initStart } from "./sections/START";
-import { initSection } from "./SectionTemplate";
 import { initTUTORIAL } from "./sections/TUTORIAL";
 
 // Не завбывайте писать код для анимации секций и импортировать их
@@ -33,9 +32,6 @@ sections.forEach((section, index) => {
         initTUTORIAL(section, stateManager, index);
         return;
     }
-
-    // initSection - пока заглушка, анимация секции по дефолту
-    initSection(section, stateManager, index);
 });
 
 initControls(stateManager);

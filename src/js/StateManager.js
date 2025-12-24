@@ -23,7 +23,12 @@ export default class StateManager {
         this.state = newState;
         console.log(`this.state: ${this.state}`);
         this.emit(newState);
-    }
+    };
+
+    setCurrentIndex(index) {
+        this.currentIndex = index;
+        console.log(`this.currentIndex: ${this.currentIndex}`)
+    };
 
     /**
      * Подписка на событие.
@@ -87,6 +92,5 @@ export default class StateManager {
         } else {
             this.setState(this.STATES.PLAYING);
         }
-        console.log(`this.state: ${this.state}`);
     }
 }

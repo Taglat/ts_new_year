@@ -1,20 +1,47 @@
 import gsap from "gsap";
+import { getCurrentIndexByScroll } from "./utils";
+
+let scrollListenerAdded = false;
 
 export function initControls(stateManager) {
     const playPauseBtn = document.querySelector("#play-pause-btn");
     let autoScrollTimeline = null;
+    let isAutoScrolling = false;
 
-    // 🎯 Подписываемся на событие PLAYING
+    // 🎯 Обработчик ручного скролла
+    if (!scrollListenerAdded) {
+        window.addEventListener("scroll", () => {
+            if (!isAutoScrolling) {
+                if (stateManager.state === stateManager.STATES.PLAYING) {
+                    stateManager.setState(stateManager.STATES.PAUSED);
+                }
+            }
+        });
+
+        scrollListenerAdded = true;
+    }
+
+    // 🎯 Подписка на событие PLAYING
     stateManager.on(stateManager.STATES.PLAYING, () => {
+        stateManager.setCurrentIndex(getCurrentIndexByScroll(stateManager.sections));
+
         if (!autoScrollTimeline) {
             autoScrollTimeline = createAutoScrollTimeline();
+        } else {
+            // Если timeline уже есть, пересоздаём с новым startIndex
+            autoScrollTimeline.kill();
+            autoScrollTimeline = createAutoScrollTimeline();
         }
+
         autoScrollTimeline.play();
         updateIcon();
     });
 
-    // 🎯 Подписываемся на событие PAUSED
+    // 🎯 Подписка на событие PAUSED
     stateManager.on(stateManager.STATES.PAUSED, () => {
+        if (autoScrollTimeline) {
+            autoScrollTimeline.pause();
+        }
         updateIcon();
     });
 
@@ -23,47 +50,43 @@ export function initControls(stateManager) {
      */
     function createAutoScrollTimeline() {
         const tl = gsap.timeline({
-            paused: true, // Изначально на паузе
+            paused: true,
+            onStart: () => { isAutoScrolling = true; },
             onComplete: () => {
+                isAutoScrolling = false;
                 stateManager.setState(stateManager.STATES.FINISHED);
-                stateManager.setState(stateManager.STATES.PAUSED);
                 updateIcon();
             }
         });
 
-        // Добавляем скролл к каждой секции
-        stateManager.sections.forEach((section, index) => {
+        // Начинаем с текущего индекса
+        const startIndex = stateManager.currentIndex;
+
+        stateManager.sections.slice(startIndex).forEach((section, i) => {
+            const index = startIndex + i;
             tl.to(window, {
-                scrollTo: {
-                    y: section,
-                    autoKill: false
-                },
+                scrollTo: { y: section, autoKill: false },
                 duration: 1,
                 ease: "power2.inOut",
                 onStart: () => {
-                    stateManager.currentIndex = index;
-                    console.log(`Scrolling to section ${index + 1}`);
-                }
-            })
-                .to({}, { duration: 2 }); // Пауза 2 сек на каждой секции
+                    isAutoScrolling = true;
+                    stateManager.setCurrentIndex(index);
+                },
+                onComplete: () => { isAutoScrolling = false; }
+            }).to({}, { duration: 2 });
         });
 
         return tl;
     }
 
+
     /**
      * Обновляет иконку кнопки Play/Pause
      */
     function updateIcon() {
-        // Показываем Pause (⏸) только когда состояние PLAYING
-        // Во всех остальных случаях (intro, paused, finished) показываем Play (▶)
         playPauseBtn.innerHTML = stateManager.state === stateManager.STATES.PLAYING
-            ? `<svg viewBox="0 0 24 24">
-                 <path d="M6 5h4v14H6zm8 0h4v14h-4z" />
-               </svg>` // Pause ⏸
-            : `<svg viewBox="0 0 24 24">
-                 <path d="M8 5v14l11-7z" />
-               </svg>`; // Play ▶
+            ? `<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>` // Pause
+            : `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`; // Play
     }
 
     updateIcon();
@@ -71,31 +94,14 @@ export function initControls(stateManager) {
     // 🎬 Кнопка Play/Pause
     playPauseBtn.addEventListener("click", () => {
         stateManager.togglePlayPause();
-        updateIcon();
-
-        if (stateManager.state === "paused") {
-            // Пауза: останавливаем таймлайн
-            if (autoScrollTimeline) {
-                autoScrollTimeline.pause();
-            }
-        } else {
-            // Play: запускаем/возобновляем таймлайн
-            if (!autoScrollTimeline) {
-                autoScrollTimeline = createAutoScrollTimeline();
-            }
-            autoScrollTimeline.play();
-        }
     });
 
     // ⏭ Кнопка "Следующая секция"
     document.querySelector("#next-btn").addEventListener("click", () => {
         const nextIndex = stateManager.currentIndex + 1;
         if (nextIndex < stateManager.sections.length) {
-            // Останавливаем автоплей при ручном переключении
-            if (autoScrollTimeline) {
-                autoScrollTimeline.pause();
-            }
             stateManager.setState(stateManager.STATES.PAUSED);
+            stateManager.setCurrentIndex(nextIndex);
             updateIcon();
 
             gsap.to(window, {
@@ -110,11 +116,8 @@ export function initControls(stateManager) {
     document.querySelector("#prev-btn").addEventListener("click", () => {
         const prevIndex = stateManager.currentIndex - 1;
         if (prevIndex >= 0) {
-            // Останавливаем автоплей при ручном переключении
-            if (autoScrollTimeline) {
-                autoScrollTimeline.pause();
-            }
             stateManager.setState(stateManager.STATES.PAUSED);
+            stateManager.setCurrentIndex(prevIndex);
             updateIcon();
 
             gsap.to(window, {
