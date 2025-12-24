@@ -1,7 +1,9 @@
 import gsap from "gsap";
+import { startAutoScroll } from "../autoPlay";
 
-export function initSection({ section, index, stateManager }) {
+export function initSection({ section, index, stateManager, sections }) {
     console.log("section index", index);
+
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: section,
@@ -10,23 +12,41 @@ export function initSection({ section, index, stateManager }) {
             scrub: true,
             pin: true,
 
-            onEnter: () => { return stateManager.setIndex(index) },
-            onEnterBack: () => { return stateManager.setIndex(index) }
+            onEnter: () => {
+                if (stateManager.state === "scroll") {
+                    stateManager.setIndex(index);
+                }
+            },
+            onEnterBack: () => {
+                if (stateManager.state === "scroll") {
+                    stateManager.setIndex(index);
+                }
+            },
+
+            // 🔥 ВОТ ОНО
+            onLeave: () => {
+                if (stateManager.state === "auto") {
+                    stateManager.setIndex(index + 1);
+                    startAutoScroll(stateManager, sections);
+                }
+            }
         }
     });
 
     tl.from(section.querySelector(".title"), {
         y: 100,
         opacity: 0
-    })
-        .from(section.querySelector(".text"), {
+    }).from(
+        section.querySelector(".text"),
+        {
             y: 50,
             opacity: 0
-        }, "<")
-    // .from(section.querySelector(".image"), {
-    //     scale: 0.8,
-    //     opacity: 0
-    // });
+        },
+        "<"
+    );
+
+    // autoplay использует этот trigger
+    section._st = tl.scrollTrigger;
 
     return tl;
 }

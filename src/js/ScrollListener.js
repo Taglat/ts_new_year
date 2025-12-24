@@ -1,17 +1,28 @@
 let scrollListenerAdded = false;
 
 export function initScrollListener(stateManager, sections) {
-    if (scrollListenerAdded) return;
+    // если слушатель уже добавлен или включен autoplay
+    if (scrollListenerAdded || stateManager.state === "auto") return;
+
+
+    // Отключение автоматической прокрутки и слушатели для отключения
+    // const interrupt = () => {
+    //     if (stateManager.state === "auto") {
+    //         stateManager.setState("scroll");
+    //         stopAutoScroll();
+    //     }
+    // };
+
+    // window.addEventListener("wheel", interrupt, { passive: true });
+    // window.addEventListener("touchstart", interrupt, { passive: true });
+    // window.addEventListener("keydown", interrupt);
+
 
     window.addEventListener("scroll", () => {
-        // auto -> scroll
-        // if (stateManager.state !== "scroll") {
-        //     stateManager.setState("scroll");
-        // }
+        if (stateManager.state !== "scroll") return;
 
-        // stateManager индекс 
         const scrollY = window.scrollY;
-        let closestIndex = 0;
+        let closestIndex = stateManager.currentIndex;
         let minDistance = Infinity;
 
         sections.forEach((section, index) => {

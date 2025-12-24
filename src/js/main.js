@@ -15,18 +15,18 @@ const sections = document.querySelectorAll(".section");
 
 sections.forEach((section, index) => {
     if (section.classList.contains("TUTORIAL")) {
-        initTUTORIAL({ section: section, index: index, stateManager: stateManager });
+        initTUTORIAL({ section, index, stateManager, sections });
     } else if (section.classList.contains("START")) {
-        initStart({ section, index, stateManager });
+        initStart({ section, index, stateManager, sections });
     } else if (section.classList.contains("OCT_2024")) {
-        initOCT_2024({ section, index, stateManager });
+        initOCT_2024({ section, index, stateManager, sections });
     }
     else {
-        initSection({ section, index, stateManager });
+        initSection({ section, index, stateManager, sections });
     }
 });
 
 initControls(stateManager, sections);
-initScrollListener(stateManager);
+initScrollListener(stateManager, sections);
 
 ScrollTrigger.refresh();

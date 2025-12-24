@@ -1,5 +1,4 @@
-// import ScrollTrigger from "gsap/ScrollTrigger";
-// import { moveToSection } from "./utils";
+import { startAutoScroll, stopAutoScroll } from "./autoPlay";
 
 const svgPlay = `
 <svg viewBox="0 0 24 24">
@@ -24,25 +23,21 @@ export function initControls(stateManager, sections) {
             state === "auto" ? svgPause : svgPlay;
     });
 
-    startBtn.addEventListener("click", () => {
-        stateManager.setState("auto");
-        playPauseBtn.innerHTML = svgPause;
-        // ScrollTrigger.getAll().forEach(st => st.enable());
-    });
-
     playPauseBtn.addEventListener("click", () => {
         if (stateManager.state === "scroll") {
             stateManager.setState("auto");
             console.log("play click, new State", stateManager);
-
-            playPauseBtn.innerHTML = svgPause;
-            // ScrollTrigger.getAll().forEach(st => st.disable());
+            startAutoScroll(stateManager, sections);
         } else {
             stateManager.setState("scroll");
-            console.log("pauseClick click, new State", stateManager);
-            playPauseBtn.innerHTML = svgPlay;
-            // ScrollTrigger.getAll().forEach(st => st.enable());
+            stopAutoScroll(stateManager, sections);
         }
+    });
+
+    startBtn?.addEventListener("click", () => {
+        stateManager.setIndex(1); // 👈 OCT_2024
+        stateManager.setState("auto");
+        startAutoScroll(stateManager, sections);
     });
 
     // document.querySelector("#prev").onclick = () => {
