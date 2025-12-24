@@ -1,28 +1,18 @@
 import gsap from "gsap";
 
-export function initStart(section, stateManager, index) {
-    console.log(`START INIT (index ${index})`);
+export function initStart({ section, index, stateManager }) {
     const title = section.querySelector("h3");
     const btn = section.querySelector("#start-btn");
     const p = section.querySelector("p");
 
-    let isHidden = false; // защита от повторного срабатывания
-
-    function hideStart(shouldPlay = false) {
-        if (isHidden) return;
-        isHidden = true;
-
-        if (shouldPlay) {
-            stateManager.setState(stateManager.STATES.PLAYING);
-        } else {
-            stateManager.setState(stateManager.STATES.PAUSED);
-        }
+    function start(shouldPlay = false) {
+        stateManager.setState(shouldPlay ? "auto" : "scroll");
 
         gsap.to(section, {
             duration: 0.5,
             onComplete: () => {
-                window.removeEventListener("wheel", onFirstScroll);
-                window.removeEventListener("touchmove", onFirstScroll);
+                window.removeEventListener("wheel", onFirstScroll); // Убираем слушателя скролла
+                window.removeEventListener("touchmove", onFirstScroll); // Убираем слушателя моб скролла
             }
         });
     }
@@ -45,16 +35,14 @@ export function initStart(section, stateManager, index) {
             }
         }, "-=1");
 
-    // Клик по кнопке
     btn.addEventListener("click", () => {
-        hideStart(true);
+        start(true);
     });
 
-    // Первый скролл (мышь + тач)
     function onFirstScroll(e) {
-        hideStart(false);
+        start(false);
     }
 
-    window.addEventListener("wheel", onFirstScroll, { passive: true });
-    window.addEventListener("touchmove", onFirstScroll, { passive: true });
+    window.addEventListener("wheel", onFirstScroll, { passive: true }); // Слушаем первый скролл
+    window.addEventListener("touchmove", onFirstScroll, { passive: true }); // Слушаем первый скролл
 }

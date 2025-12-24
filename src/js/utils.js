@@ -1,17 +1,13 @@
-export function getCurrentIndexByScroll(sections) {
-    const scrollY = window.scrollY;
-    let closestIndex = 0;
-    let minDistance = Infinity;
+export function moveToSection(index, sections, stateManager) {
+    stateManager.setState("auto");
 
-    sections.forEach((section, index) => {
-        const distance = Math.abs(scrollY - section.offsetTop);
-        if (distance < minDistance) {
-            minDistance = distance;
-            closestIndex = index;
+    gsap.to(window, {
+        scrollTo: sections[index],
+        duration: 1 / stateManager.speed,
+        ease: "power2.inOut",
+
+        onComplete: () => {
+            stateManager.setState("auto");
         }
     });
-
-    console.log("currentIndexByScrollChecker", closestIndex);
-
-    return closestIndex;
 }
